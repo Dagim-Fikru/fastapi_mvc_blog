@@ -1,0 +1,14 @@
+#gitignore for fastapi project below
+
+# Python cache files
+__pycache__/
+*.py[cod]
+# Distribution / packaging
+.Python
+build/
+venv/
+dist/
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+.env
