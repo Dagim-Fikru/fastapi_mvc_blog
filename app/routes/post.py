@@ -6,11 +6,11 @@ from app.schemas.post import PostCreate, PostResponse
 from app.models.user import User
 
 router = APIRouter()
-post_service = PostService()
+post_service: PostService = Depends()
 
 MAX_PAYLOAD_SIZE = 1 * 1024 * 1024  # 1 MB
 
-@router.post("/add-post", response_model=None)
+@router.post("/add-post", response_model=PostResponse)
 async def add_post(
     request: Request,
     current_user: User = Depends(get_current_user),

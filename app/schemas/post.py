@@ -9,6 +9,6 @@ class PostResponse(BaseModel):
     post_id: int
     text: str
     
-    # class Config:
-    #     from_attributes = True
-    #     populate_by_name = True  # Allows using both field name and alias
+    class Config:
+        from_attributes = True
+        populate_by_name = True  # Allows using both field name and alias
