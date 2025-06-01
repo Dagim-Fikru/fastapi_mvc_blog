@@ -39,7 +39,7 @@ async def add_post(
     )
 
 
-@router.get("/get-posts",response_model=None)
+@router.get("/get-posts", response_model=list[PostResponse])
 async def get_posts(
     current_user: User = Depends(get_current_user),
     post_service: PostService = Depends()
