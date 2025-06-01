@@ -1,23 +1,24 @@
 from sqlalchemy.orm import Session
 from app.models.user import User
 from app.models.post import Post
+
 class PostRepository:
-    @staticmethod
-    def create_post(db: Session, user_id: int, text: str):
+    def __init__(self, db: Session):
+        self.db = db
+
+    def create_post(self, user_id: int, text: str):
         post = Post(user_id=user_id, text=text)
-        db.add(post)
-        db.commit()
-        db.refresh(post)
+        self.db.add(post)
+        self.db.commit()
+        self.db.refresh(post)
         return post
 
-    @staticmethod
-    def get_posts_by_user(db: Session, user_id: int):
-        return db.query(Post).filter(Post.user_id == user_id).all()
+    def get_posts_by_user(self, user_id: int):
+        return self.db.query(Post).filter(Post.user_id == user_id).all()
 
-    @staticmethod
-    def delete_post(db: Session, post_id: int, user_id: int):
-        post = db.query(Post).filter(Post.id == post_id, Post.user_id == user_id).first()
+    def delete_post(self, post_id: int, user_id: int):
+        post = self.db.query(Post).filter(Post.id == post_id, Post.user_id == user_id).first()
         if post:
-            db.delete(post)
-            db.commit()
+            self.db.delete(post)
+            self.db.commit()
         return post
